@@ -263,18 +263,20 @@ function findKeywordMatch(message) {
   return null;
 }
 
-// Qwen API 呼び出し
+// Qwen API 呼び出し（OpenRouter 経由）
 async function callQwen(message) {
-  const url = 'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions';
+  const url = 'https://openrouter.ai/api/v1/chat/completions';
   
   const response = await fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${process.env.DASHSCOPE_API_KEY}`
+      'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
+      'HTTP-Referer': 'https://tsurumai-nara.com',
+      'X-Title': 'Tsurumai LINE Bot'
     },
     body: JSON.stringify({
-      model: 'qwen-plus',
+      model: 'qwen/qwen-3.5-plus',
       max_tokens: 200,
       temperature: 0.7,
       messages: [
@@ -285,7 +287,7 @@ async function callQwen(message) {
   });
 
   if (!response.ok) {
-    throw new Error(`Qwen API error: ${response.status}`);
+    throw new Error(`OpenRouter API error: ${response.status}`);
   }
 
   const data = await response.json();
