@@ -274,7 +274,7 @@ async function callQwen(message) {
       'Authorization': `Bearer ${process.env.DASHSCOPE_API_KEY}`
     },
     body: JSON.stringify({
-      model: 'qwen-plus-latest',
+      model: 'qwen-plus',
       max_tokens: 200,
       temperature: 0.7,
       messages: [
