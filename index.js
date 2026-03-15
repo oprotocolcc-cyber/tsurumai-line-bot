@@ -276,7 +276,7 @@ async function callQwen(message) {
       'X-Title': 'Tsurumai LINE Bot'
     },
     body: JSON.stringify({
-      model: 'qwen/qwen-3.5-plus',
+      model: 'qwen/qwen-2.5-72b-instruct',
       max_tokens: 200,
       temperature: 0.7,
       messages: [
